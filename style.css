@@ -39,11 +39,11 @@ svg {
     background-color: rgb(59, 199, 241);
 }
 
-.kick-pad.active {
+.snare-pad.active {
     background-color: rgb(246, 128, 59);
 }
 
-.kick-pad.active {
+.hihat-pad.active {
     background-color: rgb(245, 70, 245);
 }
 
