@@ -11,6 +11,7 @@ class DrumKit {
 
         this.selects = document.querySelectorAll('select');
         this.playBtn = document.querySelector('.play');
+        this.muteBtns = document.querySelectorAll('.mute');
 
         this.index = 0;
         this.bitsPerMinute = 150;
@@ -87,6 +88,42 @@ class DrumKit {
         }
     }
 
+    mute(event) {
+        const muteIndex = event.target.getAttribute('data-track');
+        event.target.classList.toggle('active');
+
+        if (event.target.classList.contains('active')) {
+            switch (muteIndex) {
+                case '0':
+                    this.kickAudio.volume = 0;
+                    event.target.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    break;
+                case '1':
+                    this.snareAudio.volume = 0;
+                    event.target.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    break;
+                case '2':
+                    this.hihatAudio.volume = 0;
+                    event.target.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    break;
+            }
+        } else {
+            switch (muteIndex) {
+                case '0':
+                    this.kickAudio.volume = 1;
+                    event.target.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                    break;
+                case '1':
+                    this.snareAudio.volume = 1;
+                    event.target.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                    break;
+                case '2':
+                    this.hihatAudio.volume = 1;
+                    event.target.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                    break;
+            }
+        }
+    }
 
 }
 
@@ -111,5 +148,18 @@ drumKit.playBtn.addEventListener('click', function () {
 drumKit.selects.forEach(select => {
     select.addEventListener('change', function (event) {
         drumKit.changeSound(event);
+    });
+});
+
+drumKit.muteBtns.forEach(mBtn => {
+    mBtn.addEventListener('click', function (event) {
+        drumKit.mute(event);
+    });
+});
+
+// to initialize the mute buttons icon
+drumKit.muteBtns.forEach(mBtn => {
+    document.addEventListener('DOMContentLoaded', function (event) {
+        mBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
     });
 });
