@@ -13,6 +13,8 @@ class DrumKit {
         this.playBtn = document.querySelector('.play');
         this.muteBtns = document.querySelectorAll('.mute');
 
+        this.tempoSlider = document.querySelector('.tempo-slider');
+
         this.index = 0;
         this.bitsPerMinute = 150;
         this.isPlaying = null
@@ -125,6 +127,21 @@ class DrumKit {
         }
     }
 
+    changeTempo(event) {
+        const tempoText = document.querySelector('.tempo-nr');
+        tempoText.innerText = event.target.value;
+    }
+
+    updateTempo(event) {
+        this.bitsPerMinute = event.target.value;
+        clearInterval(this.isPlaying);
+        this.isPlaying = null;
+        if (this.playBtn.classList.contains('active')) {
+            console.log('ACTIVE');
+            this.start();
+        }
+    }
+
 }
 
 const drumKit = new DrumKit();
@@ -163,3 +180,11 @@ drumKit.muteBtns.forEach(mBtn => {
         mBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
     });
 });
+
+drumKit.tempoSlider.addEventListener('input', function (event) {
+    drumKit.changeTempo(event);
+})
+
+drumKit.tempoSlider.addEventListener('change', function (event) {
+    drumKit.updateTempo(event);
+})
