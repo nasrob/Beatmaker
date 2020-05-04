@@ -51,7 +51,7 @@ class DrumKit {
 
     start() {
         const interval = (60 / this.bitsPerMinute) * 1000;
-        // check if it's palying
+        // check if it's playing
         if (!this.isPlaying) {
             this.isPlaying = setInterval(() => {
                 this.repeater();
